@@ -7,5 +7,5 @@ Current stack:
 - React.js
 - Express.js, including Express Router
 - Node.js
-- Various front-end tools such as: EJSmate
+- Various front-end tools such as: Bootstrap, EJSmate
 - Various back-end tools such as: JOI validation library
