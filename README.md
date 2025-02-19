@@ -1,4 +1,4 @@
-My repository for an ongoing code-along project using MERN stack and various libraries.
+My repository for an ongoing code-along project using MERN stack and various libraries. Basically Yelp, but for campsites.
 Coding alongside Colt Steele's Web Developer Bootcamp course on Udemy.
 https://www.udemy.com/course/the-web-developer-bootcamp/
 
