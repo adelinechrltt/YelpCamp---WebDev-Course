@@ -2,17 +2,14 @@ const express = require('express');
 const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
+const session = require('express-session');
 
-const {campgroundJoiSchema, reviewJoiSchema} = require("./schemas");
-
-const catchAsyncError = require("./utils/catchAsyncError");
 const ExpressError = require("./utils/ExpressError");
 
 const mongoose = require('mongoose');
-const Campground = require('./models/campground');
-const Review = require('./models/review');
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp');
+mongoose.connect('mongodb://localhost:27017/yelp-camp', {
+});
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
@@ -30,9 +27,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate);
 
+const sessionConfig = {
+    secret:'supersecretsecret!!!!',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 1000*60*60*24*7,
+        maxAge: 1000*60*60*24*7
+    }
+};
+app.use(session(sessionConfig));
+
 app.use('/campgrounds', campgrounds);
 app.use('/campgrounds/:id/reviews', review);
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     res.render('home');
